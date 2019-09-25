@@ -1,0 +1,125 @@
+{% extends "main.html" %}
+{% block content %}
+
+	<div class="row top-menu">
+		<div class="col-md-12">
+			<h1>Catalog Application</h1>
+			<a href="{{url_for('.showLogout')}}">
+				<button id="logout">Logout</button>
+			</a>
+		</div>
+	</div>
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+
+
+	<div class = 'flash'>
+		  {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-6" 	> <!-- Left box -->
+
+			<div class="row banner main">
+				<div class="col-md-6 padding-none">
+					<h2>Categories</h2>               <!--Box Heading-->
+				</div>
+				<div class="col-md-6 padding-none">
+					<a href="{{url_for('newCategory')}}">
+						<button class="btn btn-default" id="new-category">
+							<span class="" aria-hidden="true"></span>Add Category <!--Button-->
+						</button>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12"></div>
+
+					<a href = "{{url_for('showCategory')}}">
+	<!--					<div class="col-md-3 category-list"> -->
+							<ul style="list-style: none;">
+							{% for category in categories %}
+								<li>
+									<a href="{{url_for('.showCategoryItems',
+													category_id = category.id )}}">{{category.name}}</a>
+
+									<a href="{{url_for('.editCategory',
+																		category_id=category.id )}}">
+										<button id="edit-category">Edit</button>
+									</a>
+									<a href="{{url_for('.deleteCategory',
+													category_id=category.id )}}">
+										<button id="delete-category">Delete</button>
+									</a>
+								</li>
+							{% endfor %} <!-- categories for loop -->
+							</ul>
+	<!--					</div> <!-- Category-list -->
+					</a> <!-- {{url_for('showCategory')}} -->
+
+			</div>
+
+		</div> <!-- Left box -->
+
+		<div class="col-md-6" > <!-- Right box -->
+
+			<div class="row banner main">
+				<div class="col-md-6 padding-none">
+					<h2>Items</h2>
+				</div>
+				<div class="col-md-6 padding-none">
+					<a href="{{url_for('newItem')}}">
+						<button class="btn btn-default" id="new-item">
+							<span class="" aria-hidden="true"></span>Add Item
+						</button>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12"></div>
+
+
+				<a href = "{{url_for('showCategory')}}">
+<!--						<div class="col-md-3 item-list"> -->
+					<ul style="list-style: none;">
+						{% for item in items %}
+						<li>
+						<a href="{{url_for('showItemDescription',
+												item_id = item.id )}}">{{item.name}} </a>
+
+							<a href="{{url_for('.editItem',item_id=item.id )}}">
+								<button id="edit-item">Edit</button>
+							</a>
+							<a href="{{url_for('.deleteItem',item_id=item.id )}}">
+								<button id="delete-item">Delete</button>
+							</a>
+
+
+						</li>
+						{% endfor %} <!-- categories for loop -->
+					</ul>
+
+			</div>
+
+		</div> <!-- Right box -->
+	</div> <!-- class="row"> -->
+
+	<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+
+{% endblock %}

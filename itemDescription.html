@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div>
+	<h2> Item Description : {{item.description}} </h2>
+
+	<form action="#" >
+
+		<a href = '{{url_for('showCategoryItems', category_id = item.category_id)}}'>
+		<button class="btn btn-default delete" type="button">
+			<span class="glyphicon" aria-hidden="true"></span> Return Back</button>
+		</a>
+
+	</form>
+</div>
+
+<!--
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h2> Item Description : {{item.description}} </h2>
+
+    <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+<script>
+	function openForm() {
+  document.getElementById("myForm").style.display  = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display  = "none";
+}
+</script>
+-->
+{% endblock %}
